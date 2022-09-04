@@ -42,14 +42,28 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 
     log("---------------------------")
 
-    // const args = [
-    //     vrfCoordinatorV2Address,
-    //     subscriptionId,
-    //     networkConfig[chainId].keyHash,
-    //     networkConfig[chainId].mintFee,
-    //     //tokenUris
-    //     networkConfig[chainId].callbackGasLimit,
-    // ]
+    const args = [
+        vrfCoordinatorV2Address,
+        subscriptionId,
+        networkConfig[chainId].keyHash,
+        networkConfig[chainId].callbackGasLimit,
+        tokenUris,
+        networkConfig[chainId].mintFee,
+    ]
+
+    const randomIpfsNft = await deploy("RandomIpfsNft", {
+        from: deployer,
+        args,
+        log: true,
+        waitConfirmations: network.config.blockConfirmations || 1,
+    })
+
+    log("---------------------------")
+
+    if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
+        log("Verifying...")
+        await verify(randomIpfsNft.address, args)
+    }
 }
 const handleTokenUris = async () => {
     const tokenUris = []
