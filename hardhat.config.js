@@ -53,6 +53,16 @@ module.exports = {
             rinkeby: ETHERSCAN_API_KEY,
             goerli: ETHERSCAN_API_KEY,
         },
+        customChains: [
+            {
+                network: "rinkeby",
+                chainId: 4,
+                urls: {
+                    apiURL: "https://api-rinkeby.etherscan.io/api",
+                    browserURL: "https://rinkeby.etherscan.io",
+                },
+            },
+        ],
     },
     gasReporter: {
         enabled: REPORT_GAS,
