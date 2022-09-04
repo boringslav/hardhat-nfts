@@ -4,11 +4,6 @@ const { verify } = require("../utils/verify")
 const { storeImages, storeTokenUriMetadata } = require("../utils/uploadToPinata")
 
 const imagesLocation = "./images/randomNft"
-const tokensURIs = [
-    "ipfs://QmNVNCJLYjihwEkcxBULSMPxUXLXnKKNGs7gj2X927BDF4",
-    "ipfs://QmVPX9HX4bfWtax2x37YxkByD3YrqdXvQMRNMxALvDpxbP",
-    "ipfs://Qma1U9H9fLXwg3eMcZWUKt7K12ZyhTKGxjkxntXoykjooq",
-]
 const metadataTemplate = {
     name: "",
     description: "",
@@ -25,7 +20,11 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
     const chainId = network.config.chainId
-    let tokenUris
+    let tokenUris = [
+        "ipfs://QmNVNCJLYjihwEkcxBULSMPxUXLXnKKNGs7gj2X927BDF4",
+        "ipfs://QmVPX9HX4bfWtax2x37YxkByD3YrqdXvQMRNMxALvDpxbP",
+        "ipfs://Qma1U9H9fLXwg3eMcZWUKt7K12ZyhTKGxjkxntXoykjooq",
+    ]
 
     // get the IPFS hashes of our images
     if (process.env.UPLOAD_TO_PINATA == "true") {

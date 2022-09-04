@@ -88,6 +88,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
         //88 -> St. Bernard
 
         Breed dogBreed = getBreedFromModdedRng(moddedRng);
+        s_tokenCounter += s_tokenCounter;
         _safeMint(nftOwner, newTokenId);
         _setTokenURI(
             newTokenId,
