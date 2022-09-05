@@ -1,4 +1,4 @@
-const { assert } = require("chai")
+const { assert, expect } = require("chai")
 const { network, getNamedAccounts, deployments, ethers } = require("hardhat")
 const { developmentChains, networkConfig } = require("../../helper-hardhat-config")
 
@@ -20,6 +20,18 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat-confi
                   const dogTokenUriFirst = (await randomIpfsNft.getDogTokenUris(0)).toString()
                   assert(dogTokenUriFirst.includes("ipfs://"))
                   assert.equal(tokenCounter, "0")
+              })
+          })
+          describe("requestNft", () => {
+              it("fails if payment isn't sent with the request", async function () {
+                  await expect(randomIpfsNft.requestNft()).to.be.revertedWith("NeedMoreETHSent")
+              })
+              it("emits an event and kicks off a random word request", async function () {
+                  const fee = await randomIpfsNft.getMintFee()
+                  await expect(randomIpfsNft.requestNft({ value: fee.toString() })).to.emit(
+                      randomIpfsNft,
+                      "NftRequested"
+                  )
               })
           })
       })
