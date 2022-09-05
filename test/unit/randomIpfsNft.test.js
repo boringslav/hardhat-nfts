@@ -15,8 +15,10 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat-confi
           })
 
           describe("Constructor", () => {
-              it("When initialized the token counter should be 0", async () => {
+              it("Sets starting values correctly", async () => {
                   const tokenCounter = (await randomIpfsNft.getTokenCounter()).toString()
+                  const dogTokenUriFirst = (await randomIpfsNft.getDogTokenUris(0)).toString()
+                  assert(dogTokenUriFirst.includes("ipfs://"))
                   assert.equal(tokenCounter, "0")
               })
           })
