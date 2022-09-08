@@ -46,6 +46,7 @@ module.exports = {
             saveDeployments: true,
             chainId: 4,
             blockConfirmations: 5,
+            gas: 6000000,
         },
     },
     etherscan: {
