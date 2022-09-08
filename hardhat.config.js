@@ -45,6 +45,7 @@ module.exports = {
             accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
             saveDeployments: true,
             chainId: 4,
+            blockConfirmations: 5,
         },
     },
     etherscan: {
