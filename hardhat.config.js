@@ -38,7 +38,9 @@ module.exports = {
             chainId: 5,
             blockConfirmations: 6,
             url: `${GOERLI_RPC_URL}`,
-            accounts: [PRIVATE_KEY],
+            accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+            saveDeployments: true,
+            gas: 6000000,
         },
         rinkeby: {
             url: RINKEBY_RPC_URL,
@@ -62,6 +64,14 @@ module.exports = {
                 urls: {
                     apiURL: "https://api-rinkeby.etherscan.io/api",
                     browserURL: "https://rinkeby.etherscan.io",
+                },
+            },
+            {
+                network: "goerli",
+                chainId: 5,
+                urls: {
+                    apiURL: "https://api-goerli.etherscan.io/",
+                    browserURL: "https://goerli.etherscan.io",
                 },
             },
         ],
